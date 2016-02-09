@@ -14,7 +14,8 @@ Test rendering pointclouds in the browser using ROS packages and javascript
  
 1. create a catkin workspace
 1. symlink `catkin_src/pointcloud2_downsampler` to your workspace
-  + `ln -s ./catkin_src/pointcloud2_downsampler ~/path_to_your_catkin_workspace`
+  + `ln -s ~/path_to_pointcloud-web-test/catkin_src/pointcloud2_downsampler/ ~/path_to_your_catkin_workspace/src/`
+  + ensure `~/path_to_pointcloud-web-test` is an explicit path or the symlink will fail
 1. make package
   + `cd ~/path_to_your_catkin_workspace`
   + `catkin_make`
