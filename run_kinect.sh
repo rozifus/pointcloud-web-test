@@ -1,8 +1,15 @@
 #!/bin/bash
 
+# set first tab to start 'roscore'
+tabs=(--tab -e "bash -c 'roscore'")
+
 # extra nodes/launchers to start after 'roscore'
+# 1. websocket server
+# 2. make tf2 available for web
+# 3. kinect -> pointcloud2 @ topic=/camera/depth_registered/points
+# 4. ros video server
 declare -a nodes=(\
-"roslaunch rosbridge_server rosbridge_websocket.launch" \ 
+"roslaunch rosbridge_server rosbridge_websocket.launch" \
 "rosrun tf2_web_republisher tf2_web_republisher" \
 "roslaunch freenect_launch freenect-registered-xyzrgb.launch" \
 "rosrun web_video_server web_video_server _port:=9999" \
@@ -10,9 +17,6 @@ declare -a nodes=(\
 
 # sleep variable
 sleep_time="2"
-
-# set first tab to start 'roscore'
-tabs=(--tab -e "bash -c 'roscore'")
 
 # create a new tab for each node with a
 # sleep delay to allow 'roscore' to start first
