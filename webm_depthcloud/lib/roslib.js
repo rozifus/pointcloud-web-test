@@ -1225,6 +1225,7 @@ function SocketAdapter(client) {
         reader.onload  = function() {
           var uint8Array = new Uint8Array(this.result);
           var msg = BSON.deserialize(uint8Array);
+          console.log('process bson')
 
           if (msg.op === 'png') {
               decompressPng(msg, handleMessage);
@@ -1287,6 +1288,7 @@ function Topic(options) {
   this.queue_length = options.queue_length || 0;
 
   // Check for valid compression types
+ 
   if (this.compression && this.compression !== 'png' &&
         this.compression !== 'none') {
     this.emit('warning', this.compression +

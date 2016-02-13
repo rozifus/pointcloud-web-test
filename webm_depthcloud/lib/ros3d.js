@@ -3378,7 +3378,8 @@ ROS3D.PointCloud2 = function(options) {
   var rosTopic = new ROSLIB.Topic({
     ros : ros,
     name : topic,
-    messageType : 'sensor_msgs/PointCloud2'
+    messageType : 'sensor_msgs/PointCloud2',
+    binary_encoding: 'bson'
   });
 
   rosTopic.subscribe(function(message) {
@@ -3387,8 +3388,10 @@ ROS3D.PointCloud2 = function(options) {
     var n = message.height*message.width;
     var buffer;
     if(message.data.buffer){
+      console.log('bson')
       buffer = message.data.buffer;
     }else{
+      console.log('encoded json :(')
       buffer = decode64(message.data);
     }
     for(var i=0;i<n;i++){
